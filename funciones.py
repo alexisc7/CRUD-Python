@@ -12,10 +12,10 @@ def gestionar_conexion(func):
             return result
         except ValueError:
             print("ERROR: El ID debe ser numérico.")
+        except (sqlite3.OperationalError, sqlite3.DatabaseError) as e:
+            print(f"Error operativo o de base de datos: {e}")
         except sqlite3.Error as e:
-            print(f"Error en la base de datos: {e}")
-        except (sqlite3.DatabaseError, sqlite3.OperationalError) as e:
-            print(f"Error operativo de la base de datos: {e}")
+            print(f"Error general en la base de datos: {e}")
         except Exception as e:
             print(f"ERROR: {e}")
         finally:
